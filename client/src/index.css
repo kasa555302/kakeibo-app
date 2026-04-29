@@ -305,3 +305,60 @@ body {
   border-radius: 6px;
   font-size: 0.88rem;
 }
+
+/* バリデーション警告モーダル */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 32px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  color: #b45309;
+  margin-bottom: 14px;
+}
+
+.warning-list {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.warning-list li {
+  background: #fff7ed;
+  border-left: 4px solid #f59e0b;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.warning-list li:last-child {
+  margin-bottom: 0;
+}
+
+.modal-question {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}

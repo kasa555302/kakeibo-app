@@ -2,7 +2,9 @@ import { useState } from 'react'
 import UploadSection from './components/UploadSection'
 import RecordsTable from './components/RecordsTable'
 import Charts from './components/Charts'
+import ValidationWarning from './components/ValidationWarning'
 import { loadRecords, addReceipt, deleteRecord } from './utils/storage'
+import { validateReceipt } from './utils/validation'
 
 // 今月をデフォルトの絞り込み月として使う
 function currentMonth() {
@@ -14,8 +16,37 @@ export default function App() {
   const [records, setRecords] = useState(() => loadRecords())
   const [selectedMonth, setSelectedMonth] = useState(currentMonth())
 
-  // レシート解析後にレコードを追加する
+  // 警告表示用ステート（nullなら非表示）
+  const [pendingReceipt, setPendingReceipt] = useState(null)
+  const [warnings, setWarnings] = useState([])
+
+  // レシート解析後にバリデーションを実行する
   const handleAdd = (receiptData) => {
+    const found = validateReceipt(receiptData, records)
+    if (found.length > 0) {
+      // 警告がある場合はユーザーに確認を求める
+      setWarnings(found)
+      setPendingReceipt(receiptData)
+    } else {
+      commitAdd(receiptData)
+    }
+  }
+
+  // 警告を無視して登録を確定する
+  const handleConfirm = () => {
+    commitAdd(pendingReceipt)
+    setPendingReceipt(null)
+    setWarnings([])
+  }
+
+  // 警告ダイアログをキャンセルする（登録しない）
+  const handleCancel = () => {
+    setPendingReceipt(null)
+    setWarnings([])
+  }
+
+  // 実際にレコードを追加する
+  const commitAdd = (receiptData) => {
     setRecords((prev) => addReceipt(prev, receiptData))
   }
 
@@ -33,6 +64,15 @@ export default function App() {
 
       {/* アップロードセクション */}
       <UploadSection onAdd={handleAdd} />
+
+      {/* バリデーション警告ダイアログ */}
+      {warnings.length > 0 && (
+        <ValidationWarning
+          warnings={warnings}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+      )}
 
       {/* グラフセクション（データがある場合のみ表示） */}
       <Charts records={records} />
