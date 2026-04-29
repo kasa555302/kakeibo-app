@@ -1,0 +1,307 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ヘッダー */
+.app-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.app-header h1 {
+  font-size: 1.8rem;
+  color: #2d6a4f;
+  margin-bottom: 4px;
+}
+
+.app-header p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* アップロードエリア */
+.upload-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 24px;
+}
+
+.upload-section h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #2d6a4f;
+}
+
+.upload-area {
+  border: 2px dashed #74c69d;
+  border-radius: 10px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: #f0faf4;
+}
+
+.upload-area:hover {
+  background: #d8f3dc;
+}
+
+.upload-area.dragging {
+  background: #b7e4c7;
+  border-color: #2d6a4f;
+}
+
+.upload-area input[type="file"] {
+  display: none;
+}
+
+.upload-area .upload-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.upload-area p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.upload-area .hint {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* プレビュー */
+.preview-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.preview-wrap img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.preview-info {
+  flex: 1;
+}
+
+.preview-info p {
+  font-size: 0.88rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #2d6a4f;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1b4332;
+}
+
+.btn-danger {
+  background: #e63946;
+  color: #fff;
+  font-size: 0.82rem;
+  padding: 6px 14px;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #c1121f;
+}
+
+/* ローディング */
+.loading {
+  text-align: center;
+  padding: 16px;
+  color: #2d6a4f;
+  font-size: 0.95rem;
+}
+
+/* エラー */
+.error-msg {
+  background: #ffe5e5;
+  color: #c1121f;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+/* 集計・グラフセクション */
+.stats-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 700px) {
+  .stats-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+  font-size: 1rem;
+  color: #2d6a4f;
+  margin-bottom: 16px;
+}
+
+.chart-wrap {
+  position: relative;
+  height: 220px;
+}
+
+/* カテゴリ集計リスト */
+.category-list {
+  list-style: none;
+}
+
+.category-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.category-list li:last-child {
+  border-bottom: none;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.amount {
+  font-weight: 600;
+  color: #333;
+}
+
+/* 明細一覧 */
+.records-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.records-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.records-header h2 {
+  font-size: 1rem;
+  color: #2d6a4f;
+}
+
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.records-table th {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 2px solid #e0e0e0;
+  color: #555;
+  font-weight: 600;
+}
+
+.records-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.records-table tr:last-child td {
+  border-bottom: none;
+}
+
+.records-table tr:hover td {
+  background: #f9fafb;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #aaa;
+  padding: 32px 0;
+  font-size: 0.9rem;
+}
+
+/* 月選択 */
+.month-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.month-filter label {
+  font-size: 0.88rem;
+  color: #555;
+}
+
+.month-filter input[type="month"] {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.88rem;
+}
